@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+message FrameU8 {
+  string field_name_1 = 1;
+  string field_name_2 = 2;
+  string field_name_3 = 3;
+  string field_name_4 = 4;
+  string field_name_5 = 5;
+  string field_name_6 = 6;
+  string field_name_7 = 7;
+  string field_name_8 = 8;
+}
+
+message FrameU16 {
+  string field_name_1 = 1;
+  string field_name_2 = 2;
+  string field_name_3 = 3;
+  string field_name_4 = 4;
+}
+
+message CanData {
+  uint64 data = 1;
+  oneof frame {
+    FrameU8 u8 = 2;
+    FrameU16 u16 = 3;
+  }
+}
+
+message CanMsg {
+  enum Source {
+    TELEMETRY = 0;
+  }
+
+  uint32 id = 1;
+  Source source = 2;
+  CanData can_data = 3;
+  string msg_name = 4;
+}
+
+message CanSchema {
+  repeated CanMsg msg = 1; //
+}
+
